@@ -1,0 +1,14 @@
+cdbf24e87f0d8eaf16a733a293b71bc043fb79c7	not-for-merge	branch 'upstream/accelerate-lookups' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+515f1a16140f78c9ec379854851f77a1b44af145	not-for-merge	branch 'upstream/cff-subset' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+e3a1a8350a6a7933b0a100194985f4425ab9de19	not-for-merge	branch 'upstream/coverity_scan' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+b18a56a290bf5330e81019b33f15e6951dd86a8b	not-for-merge	branch 'upstream/cross-kern' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+648e6717dcd3d4042a8d1053f45454f2fab42419	not-for-merge	branch 'upstream/gi-identfilter' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+fc1be5edbad6285f44769dfcfaf57734da12d44f	not-for-merge	branch 'upstream/inttype-constructors' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+e3a1a8350a6a7933b0a100194985f4425ab9de19	not-for-merge	branch 'upstream/master' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+de801b766783919b23e3b05c3d9fbe616bc7e103	not-for-merge	branch 'upstream/rand' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+f462f2dbcf0cc9e069c744c4de735c17d892f291	not-for-merge	branch 'upstream/run-tests-stream' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+40531065c3041c5e65e0197b8e140585a8ff051d	not-for-merge	branch 'upstream/rvalue-reference' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+954473b4014bc17f46c68c706e1de573f87779df	not-for-merge	branch 'upstream/test-str-literal-constness' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+c55f0e2924b694518953cc2a494c8a866d3ff5f6	not-for-merge	branch 'upstream/typename-outside-template' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+503a3f49ec7b53e3db04277edaac24b3f1f0e351	not-for-merge	branch 'upstream/use-reordering' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
+e9002831815bad77c27145f2622fa459b81ff42b	not-for-merge	branch 'upstream/use-sinhala' of https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz
