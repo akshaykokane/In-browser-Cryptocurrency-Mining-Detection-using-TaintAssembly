@@ -89,18 +89,26 @@ if the website doesn't have WASM mining script, then it will return
 MESSAGE: The Website  taint_v8.log was not using InBrowser CryptoCurrency Mining
 ```
 
+## Test
 
+The file ```depthallminerstart.txt``` containts the dataset of all the webpages that have mining keyword or coinhive keyword
+
+Run the following command 
+
+```
+python testAccuracy.py
+```
+This will open all the websites from the list for 70s and collect the logs of the websites which uses WASM for mining. Collect the logs and provide the collection logs to ```detection.py``` script to check if it can detect the mining. I tried and got accuracy around 98%.
 
 ## Authors
 Akshay Kokane
 akshaykokane.com
 
 
-
 ## Acknowledgments
 
-* Prof. Kyu Lee, University of Georgia
-* Special thanks to  William Fu, Daniel Inge, and Raymond Lin for open sourcing the TaintAssembly (https://github.com/wfus/WebAssembly-Taint)
+* Thanks to Prof. Kyu Lee, University of Georgia, Athens for guidance.
+* Special thanks to  William Fu, Daniel Inge, and Raymond Lin for open sourcing the TaintAssembly (https://github.com/wfus/WebAssembly-Taint).
 
 ## References
 1. https://chromium.googlesource.com/chromium/src/+/master/docs/linux_build_instructions.md
