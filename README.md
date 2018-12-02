@@ -7,9 +7,7 @@ For detection of In-Browser mining, I have used TaintAssembly. You can find more
 
 ## Getting Started
 
-1. Download and follow instrcution for building, compiling and executing the modified V8 from https://github.com/wfus/WebAssembly-Taint
-2. Check by V8's in-built debugging tool d8, that modified v8 is working and has the taint_flags. You can find more information about d8 here : https://v8.dev/docs/d8
-
+The project required to work with modified v8 and 64.0.3270.2 version of the chromium.
 
 ### Prerequisites
 
@@ -22,70 +20,89 @@ export PATH=$PATH:/path/to/depot_tools
 
 ### Installing
 
+1. Download and follow instrcution for building, compiling and executing the modified V8 from https://github.com/wfus/WebAssembly-Taint
+2. Check by V8's in-built debugging tool d8, that modified v8 is working and has the taint_flags. You can find more information about d8 [here](https://v8.dev/docs/d8)
+3. Start with fresh directory for checking out the chromium and follow the below steps for icorportating modified v8 in chromium base
 
 
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+mkdir ~/chromium && cd ~/chromium
+fetch --nohooks chromium
+cd src
+git checkout 64.0.3270.2
+cd v8
+git checkout chromium/3270
+rm -rf src/
+git clone https://www.github.com/wfus/WebAssembly-Taint src/
+cd ..
+gclient sych
+gn gen out/Default
 
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+This will start the chrome. Verify the chrome and v8 versions are the required one by typing the following in address bar of the chrome
 
 ```
-Give an example
+chrome://version
 ```
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
 
-## Built With
+## Running the chrome in taint mode
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+After verifying the versions, then close the chrome and start the chrome with following command 
 
-## Contributing
+```
+ out/Default/chrome --no-sandbox --js-flags=" --wasm_taint --taint_full_log --taint_log=/home/akshay/workspace2/logs/taint_v8.log"
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+```
+This will start chrome in taint mode. Learn mode about the taint mode from [here](https://github.com/wfus/WebAssembly-Taint/blob/master/TaintAssembly.pdf) 
+       
+      
+### Logging and detection
 
-## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+1. Now from the opened chrome go to https://webassembly.org/demo/Tanks/
+2. Either keeping chrome alive or closing it, check that if the log file ```taint_v8.log``` is generated. Open the file and check if logs are successfuly generated. 
+3. If logs are generated, then you are on the right path. If not, then you need to fix something.
+
+#### Note
+    You may need to delete the profile by deleting all the files from ~/.config/chromium/ (this step is useful if you have compiled the chrome before with newer version). Also I got more problems while checkouting the older version, like with sqlite. I reported the bug, check [here](https://bugs.chromium.org/p/chromium/issues/detail?id=906411#) to know more about the bug and fixes
+
+Detection:
+
+1. Copy on your local ```testsite``` 
+2. Open testsite/index.html in the chrome
+3. This will generate the log file as testsite/index.html has the wasm mining script in it (coinhive)
+4. Close the chrome 
+5. For detection
+
+```
+python detection.py /home/akshay/workspace2/logs/taint_v8.log
+```
+This should return :
+```
+DANGER: The Website taint_v8.log was using InBrowser CryptoCurrency Mining
+```
+if the website doesn't have WASM mining script, then it will return
+
+```
+MESSAGE: The Website  taint_v8.log was not using InBrowser CryptoCurrency Mining
+```
+
+
 
 ## Authors
+Akshay Kokane
+akshaykokane.com
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Prof. Kyu Lee, University of Georgia
+* Special thanks to  William Fu, Daniel Inge, and Raymond Lin for open sourcing the TaintAssembly (https://github.com/wfus/WebAssembly-Taint)
+
+## References
+1. https://chromium.googlesource.com/chromium/src/+/master/docs/linux_build_instructions.md
+2. http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up
+3. https://v8.dev/docs/build-gn
